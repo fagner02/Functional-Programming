@@ -2,12 +2,13 @@ import Data.List
 
 uniqueFilter n xs = (length (filter (==n) xs)) == 1
 
-uniqueRecursive n xs 
-    | null xs = False
-    | ((length (group xs)) == 1) = (length xs) == 1
-    | not ((head xs) == n) = uniqueRecursive n (tail xs)
-    | n == (head xs) = uniqueRecursive n ((tail xs) ++ [n])
+uniqueRecursive' n xs
+    | null xs = 0
+    | (head xs) == n = 1 + uniqueRecursive' n (tail xs)
+    | otherwise = uniqueRecursive' n (tail xs)
 
+uniqueRecursive n xs = (uniqueRecursive' n xs) == 1
+    
 main = do
     a <- readLn :: IO Int
     b <- readLn :: IO [Int]
