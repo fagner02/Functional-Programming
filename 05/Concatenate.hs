@@ -4,12 +4,7 @@ concatenate xs ys = concat [xs, ys]
 
 concatenateRecursive xs ys 
     | null xs = ys
-    | null ys = xs
-    | otherwise = 
-         concat [ 
-             concat [[head xs], concatenate (tail xs) []], 
-             concat [[head ys], concatenate (tail ys) []]
-         ]
+    | otherwise = concatenate (init xs) (last xs : ys)
   
 main = do
     a <- readLn :: IO [Int]
