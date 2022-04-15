@@ -2,7 +2,7 @@ import Data.List
 
 greater n xs 
     | null xs = []
-    | head xs > n = [head xs] ++ greater n (tail xs)
+    | head xs > n = head xs: greater n (tail xs)
     | otherwise = greater n (tail xs)
     
 main = do
