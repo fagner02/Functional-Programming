@@ -1,7 +1,7 @@
 import System.IO
 
 myReplicate a b 
-    | a > 0 = [b] ++ myReplicate (a-1) b
+    | a > 0 = b : myReplicate (a-1) b
     | otherwise = []
 
 main = do
