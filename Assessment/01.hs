@@ -35,9 +35,10 @@ polygon' i xs
 
 polygon xs = polygon' 0 xs
 
-polygonMaximum xs = m < sum xs - m
-  where
-    m = maximum xs
+polygonMaximum xs 
+  | null xs = False
+  | otherwise = m < sum xs - m
+  where m = maximum xs
 
 -- 5 ----------
 gather2 a b xs
@@ -83,6 +84,7 @@ main = do
   print $ polygon [2, 3, 4, 9]
   print $ polygon [2, 3, 9, 3]
   print $ polygon [2, 3, 6, 3]
+  print $ polygonMaximum [3,2]
   print $ polygonMaximum [8, 3, 9, 3]
   print $ polygonMaximum [8, 3, 9, 3, 25]
   print $ polygonMaximum [8, 3, 9, 6, 25]
