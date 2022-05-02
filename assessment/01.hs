@@ -12,9 +12,17 @@ index n xs
     i = 1 + index n (tail xs)
 
 -- 2 ----------
-indexFold n xs = if i == length xs then -1 else i
+indexFold n xs 
+  | i == length xs = -1
+  | otherwise = i
   where
-    i = fst $ foldl (\x y -> if snd x then x else (if y == n then (fst x, True) else (fst x + 1, False))) (0, False) xs
+    i = fst $ foldl (\x y -> case () of
+        _
+          | snd x -> x 
+          | otherwise -> if y == n 
+                         then (fst x, True) 
+                         else (fst x + 1, False)
+                    ) (0, False) xs
 
 -- 3 ----------
 triangle a b c = (a + b > c) && (b + c > a) && (a + c > b)
