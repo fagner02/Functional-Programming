@@ -6,7 +6,7 @@ index n xs
   | n == head xs = 0
   | otherwise = case () of
     _
-      | i + 1 == length xs -> -1
+      | i == 0 -> -1
       | otherwise -> i
   where
     i = 1 + index n (tail xs)
