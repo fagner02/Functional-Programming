@@ -29,6 +29,7 @@ triangle a b c = (a + b > c) && (b + c > a) && (a + c > b)
 
 -- 4 ----------
 polygon' i xs
+  | null xs = False
   | i + 1 == length xs = xs !! i < sum (delete (xs !! i) xs)
   | otherwise = xs !! i < sum (delete (xs !! i) xs) && polygon' (i + 1) xs
 
@@ -48,6 +49,7 @@ gather1 a xs
   | otherwise = gather2 a (head xs) (tail xs) ++ gather1 a (tail xs)
 
 gather xs
+  | length xs < 3 = []
   | length xs == 3 = gather1 (head xs) (tail xs)
   | otherwise = gather1 (head xs) (tail xs) ++ gather (tail xs)
 
@@ -59,12 +61,14 @@ toothpicksGather xs = [(head x, x !! 1, x !! 2) | x <- list, triangle (head x) (
 
 main = do
   print "1 - index"
+  print $ index 1 []
   print $ index 2 [1, 2, 3, 4, 5, 6, 7]
   print $ index 4 [1, 2, 3, 4, 5, 6, 4]
   print $ index 7 [1, 2, 3, 4, 5, 6, 7]
   print $ index 8 [1, 2, 3, 4, 5, 6, 7]
   print $ index 15 [1, 2, 3, 4, 5, 6, 7]
   print "2 - index fold"
+  print $ indexFold 2 []
   print $ indexFold 2 [1, 2, 3, 4, 5, 6, 7]
   print $ indexFold 4 [1, 2, 3, 4, 5, 6, 4]
   print $ indexFold 7 [1, 2, 3, 4, 5, 6, 7]
@@ -75,6 +79,7 @@ main = do
   print $ triangle 2 2 3
   print $ triangle 7 2 3
   print "4 - polygon"
+  print $ polygon []
   print $ polygon [2, 3, 4, 9]
   print $ polygon [2, 3, 9, 3]
   print $ polygon [2, 3, 6, 3]
@@ -82,6 +87,7 @@ main = do
   print $ polygonMaximum [8, 3, 9, 3, 25]
   print $ polygonMaximum [8, 3, 9, 6, 25]
   print "5 - toothpicks"
+  print $ toothpicks []
   print $ toothpicks [1, 5, 6, 7]
   print $ toothpicks [1, 2, 5, 6, 7]
   print $ toothpicksGather [2, 3, 5, 12, 15, 20]
